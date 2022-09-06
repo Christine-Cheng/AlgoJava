@@ -1,5 +1,7 @@
 package com.algo.queue;
 
+import java.util.Scanner;
+
 /**
  * @Describe: 数组模拟队列
  * @Author: HAPPY
@@ -17,7 +19,54 @@ public class QueueArray {
      * rear == maxSize - 1[队列满]
      */
     public static void main(String[] args) {
-    
+        ArrayQueue arrayQueue = new ArrayQueue(3);
+        char key = ' ';//接受用户输入
+        Scanner scanner = new Scanner(System.in);
+        boolean loop = true;
+        while (loop) {
+            System.out.println("s(show:显示队列)");
+            System.out.println("e(exit:推出程序)");
+            System.out.println("a(add:添加队列数据)");
+            System.out.println("g(get:取出队列数据)");
+            System.out.println("p(peak:查看队列头数据)");
+            key = scanner.next().charAt(0);//接受一个字符
+            switch (key) {
+                case 's'://展示
+                    arrayQueue.showQueue();
+                    break;
+                case 'e'://退出
+                    scanner.close();
+                    loop = false;
+                    break;
+                case 'a'://添加
+                    System.out.println("输入一个数据");
+                    int val = scanner.nextInt();
+                    arrayQueue.addQueue(val);
+                    break;
+                case 'g'://获取
+                    try {
+                        int queue = arrayQueue.getQueue();
+                        System.out.printf("取出的数据是:%d\n",queue);;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 'p'://头数据
+                    try {
+                        int queue = arrayQueue.peakQueue();
+                        System.out.printf("队列头数据是:%d\n",queue);;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                default:
+                    break;
+                
+            }
+        }
+        System.out.println("程序退出");
     }
 }
 
@@ -84,6 +133,7 @@ class ArrayQueue {
     }
     
     //to show the data of front index
+    //显示队列头
     public int peakQueue() {
         //判断是否为空
         if (isEmpty()) {
