@@ -1,7 +1,7 @@
 package com.algo.queue;
 
 /**
- * @Describe: 数组模拟循环队列
+ * @Describe: 数组模拟循环队列:解决数组空间使用后没法复用
  * @Author: HAPPY
  * @Date: 2022-09-06 12:58 星期二
  **/
@@ -22,8 +22,9 @@ class QueryCircle {
     public QueryCircle(Integer maxSize) {
         //初始化
         this.maxSize = maxSize;
-        this.front = -1;//指向头部,可以分析出,front是指向队列头的前一个位置
-        this.rear = -1;//指向尾部,rear是指向队列为的数据(既是队列最后一个数据)
+        this.front = 0;//指向头部,front是指向队列头的第一个位置,arr[front]是队列第一个元素,front初始值为=0
+        this.rear = 0;//指向尾部,rear是指向队列尾部的后一个位置,因为希望空出一个空间作为一个约定,rear的初值为=0
+        //队列满: (rear+1 - front)%maxSize = front
         this.arr = new int[maxSize];
     }
     
